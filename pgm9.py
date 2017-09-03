@@ -13,7 +13,7 @@ def GetInlineMatrixIndex(matrixList, matrixSideLength, row, col):
         # r = r  - 1  # matracies are zero relative
         # c = col - 1 # matracies are zer0 relative
         # index = r + c
-        #
+        # 🛁
         # readableFormula = ((((((row - 1) * matrixSideLength) + 1) - 1) + col) - 1)
         # refinedFormula  = ((((row - 1) * matrixSideLength) + col) - 1)
         return ((((row - 1) * matrixSideLength) + col) - 1)
@@ -42,8 +42,8 @@ if (len(matrixData)%4 is not 0):
     print('ERROR: NxN matrix was not provided, invalid matrix.')
     sys.exit(errno.EPERM) # operation not permitted
 
-# inline NxN maytracies can be evenly divided by 4
-matrixSideLength = len(matrixData)/4 
+# in-line NxN matrices can be evenly divided by 4
+matrixSideLength = len(matrixData)/4
 
 # change the string to a list so individual indicies can be manipulated
 matrix = list(matrixData)
