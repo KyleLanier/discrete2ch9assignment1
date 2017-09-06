@@ -111,6 +111,25 @@ def BoolIsSymmetric(listMatrix):
     
     return True
 
+def MakeReflexiveMatrix(listMatrix):
+    charOne = '1'
+    matrixSideLength = int(math.sqrt(len(listMatrix)))
+
+    for i in range(1, (matrixSideLength + 1)):
+        SetInlineMatrixIndexValue(listMatrix, i, i, '1')
+
+def MakeSymmetricMatrix(listMatrix):
+    matrixSideLength - int(math.sqrt(len(listMatrix)))
+
+    for row in range(1, (matrixSideLength + 1)):
+        for col in range(1, (matrixSideLenght + 1)):
+            a = GetInlineMatrixIndexValue(listMatrix, row, col)
+            b = GetInlineMatrixIndexValue(listMatrix, col, row)
+
+            if ((a == '1') or (b == '1')):
+                SetInlineMatrixIndexValue(listMatrix, row, col, '1')
+                SetInlineMatrixIndexValue(listMatrix, col, row, '1')
+
 
 
 
@@ -118,7 +137,7 @@ def BoolIsSymmetric(listMatrix):
 
 
 # read matrix data from file, return matrix as a pythoic list
-matrix = GetInlineMatrixAsList('C:\ch9assignment1\TestData.txt')
+matrix = GetInlineMatrixAsList('TestData.txt')
 
 
 # print the matrix contents before manipulation
@@ -136,24 +155,10 @@ if (BoolIsSymmetric(matrix)):
 else:
     print('Matrix is not symmetric')
 print('------------')
-PrintMatrix(matrix, boolPrintInline=False)
 
 
+MakeReflexiveMatrix(matrix)
 
-# Note row and col are in the set of Natural numbers and both are <= matrixSideLength
-row = 2
-col = 2
-
-# print the current value of (row,col)
-PrintMatrixValue(matrix, row, col)
-
-# set the new value of (row, col)
-SetInlineMatrixIndexValue(matrix, row, col, newValue='X')
-
-# print the new value of (row, col)
-PrintMatrixValue(matrix, row, col)
-
-# print the matrix contents after manipulation
 PrintMatrix(matrix, boolPrintInline=False)
 
 # check if matrix ia reflexive
@@ -169,25 +174,59 @@ else:
     print('Matrix is not symmetric')
 print('------------')
 
-print('------------')
-PrintMatrix(matrix, boolPrintInline=False)
 
 
-# set the new value of (row, col)
-SetInlineMatrixIndexValue(matrix, row=1, col=2, newValue='X')
 
-# check if matrix ia reflexive
-if (BoolIsReflexive(matrix)):
-    print('Matrix is reflexive')
-else:
-    print('Matrix is not reflexive')
+# PrintMatrix(matrix, boolPrintInline=False)
 
-# check if matrix is symmetric
-if (BoolIsSymmetric(matrix)):
-    print('Matrix is symmetric')
-else:
-    print('Matrix is not symmetric')
-print('------------')
+# # Note row and col are in the set of Natural numbers and both are <= matrixSideLength
+# row = 2
+# col = 2
 
-print('------------')
-PrintMatrix(matrix, boolPrintInline=False)
+# # print the current value of (row,col)
+# PrintMatrixValue(matrix, row, col)
+
+# # set the new value of (row, col)
+# SetInlineMatrixIndexValue(matrix, row, col, newValue='X')
+
+# # print the new value of (row, col)
+# PrintMatrixValue(matrix, row, col)
+
+# # print the matrix contents after manipulation
+# PrintMatrix(matrix, boolPrintInline=False)
+
+# # check if matrix ia reflexive
+# if (BoolIsReflexive(matrix)):
+#     print('Matrix is reflexive')
+# else:
+#     print('Matrix is not reflexive')
+
+# # check if matrix is symmetric
+# if (BoolIsSymmetric(matrix)):
+#     print('Matrix is symmetric')
+# else:
+#     print('Matrix is not symmetric')
+# print('------------')
+
+# print('------------')
+# PrintMatrix(matrix, boolPrintInline=False)
+
+
+# # set the new value of (row, col)
+# SetInlineMatrixIndexValue(matrix, row=1, col=2, newValue='X')
+
+# # check if matrix ia reflexive
+# if (BoolIsReflexive(matrix)):
+#     print('Matrix is reflexive')
+# else:
+#     print('Matrix is not reflexive')
+
+# # check if matrix is symmetric
+# if (BoolIsSymmetric(matrix)):
+#     print('Matrix is symmetric')
+# else:
+#     print('Matrix is not symmetric')
+# print('------------')
+
+# print('------------')
+# PrintMatrix(matrix, boolPrintInline=False)
