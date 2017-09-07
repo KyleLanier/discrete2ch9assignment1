@@ -11,6 +11,8 @@ def GetInlineMatrixAsList(strFilePath):
 def GetInlineMatrxDataFromFile(strFilePath):
     # read the lines from TestData.txt
     lines = [line.rstrip('\n') for line in open(strFilePath)]
+    # print the original condition of the in-line matrix
+    print(lines[1])
     # remove all white space, commas, and braces
     matrixData = lines[1].replace(',','').replace(' ','').replace('{', '').replace('}', '')
     
@@ -84,6 +86,28 @@ def PrintMatrix(listMatrix, boolPrintInline):
     
     print('\n')
 
+def ReturnMatrix(listMatrix):
+    
+    matrixSideLength = int(math.sqrt(len(matrix)))
+    tempStr = ""
+
+    for row in range(1, matrixSideLength + 1):
+        strRow = "{"
+            
+        for col in range(1, matrixSideLength + 1):
+            if ((row == (matrixSideLength)) and (col == matrixSideLength)):
+                strRow = strRow + GetInlineMatrixIndexValue(matrix, row, col) + '}'
+            elif (col == matrixSideLength):
+                strRow = strRow + GetInlineMatrixIndexValue(matrix, row, col) + '},'
+            else:
+                strRow = strRow + GetInlineMatrixIndexValue(matrix, row, col) + ', '
+
+        tempStr = tempStr + strRow
+    
+    tempStr = '{' + tempStr + '}'
+    
+    return tempStr
+
 
 def PrintMatrixValue(listMatrix, row, col):
     print('({},{}) = {}'.format(row,col,GetInlineMatrixIndexValue(matrix, row, col)))
@@ -112,7 +136,6 @@ def BoolIsSymmetric(listMatrix):
     return True
 
 def MakeReflexiveMatrix(listMatrix):
-    charOne = '1'
     matrixSideLength = int(math.sqrt(len(listMatrix)))
 
     for i in range(1, (matrixSideLength + 1)):
@@ -176,7 +199,7 @@ print('------------')
 
 
 
-
+print(ReturnMatrix(matrix))
 # PrintMatrix(matrix, boolPrintInline=False)
 
 # # Note row and col are in the set of Natural numbers and both are <= matrixSideLength
