@@ -1,3 +1,21 @@
+# Student: Kyle Lanier y829k364
+# Student:
+# File: program_ch9.py
+# Date: 9/10/2017
+#
+# Program will:
+#               receive a data file (or multiple data files) via commandline
+#               parse the contained binary matrix within each data file
+#               print the reflexive closure of the binary matrix
+#
+# Note:
+#               the data file must contain the matrix on line two
+#               the matrix must be in the form: {{0, 0, 0},{0, 0, 0},{0, 0, 0}}
+#               the length of the data (minus white space and commas and brackets) must be >= 4
+#               the matrix must be a NxN matrix with N > = 2
+
+
+
 import errno, sys, getopt  # for proper error handling
 import math                # to use sqrt() to find the side length of a NxN matrix
 
