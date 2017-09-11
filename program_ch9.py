@@ -1,5 +1,5 @@
-import errno, sys  # for proper error handling
-import math        # to use sqrt() to find the side length of a NxN matrix
+import errno, sys, getopt  # for proper error handling
+import math                # to use sqrt() to find the side length of a NxN matrix
 
 
 
@@ -11,8 +11,6 @@ def GetInlineMatrixAsList(strFilePath):
 def GetInlineMatrxDataFromFile(strFilePath):
     # read the lines from TestData.txt
     lines = [line.rstrip('\n') for line in open(strFilePath)]
-    # print the original condition of the in-line matrix
-    print(lines[1])
     # remove all white space, commas, and braces
     matrixData = lines[1].replace(',','').replace(' ','').replace('{', '').replace('}', '')
     
@@ -38,7 +36,7 @@ def GetInlineMatrixIndex(listMatrix, row, col):
     # ensure the the length of the inline matrix has a perfect square root
     if ((math.sqrt(len(listMatrix)) - int(math.sqrt(len(listMatrix)))) == 0):
 
-        matrixSideLength = int(math.sqrt(len(matrix)))
+        matrixSideLength = int(math.sqrt(len(listMatrix)))
 
         # validate the integrity of the received data to ensure row col values are in range of the side length of the matrix
         if ( ((row > 0) and (row <= matrixSideLength)) and ((col > 0) and (col <= matrixSideLength))):
@@ -88,7 +86,7 @@ def PrintMatrix(listMatrix, boolPrintInline):
 
 def ReturnMatrix(listMatrix):
     
-    matrixSideLength = int(math.sqrt(len(matrix)))
+    matrixSideLength = int(math.sqrt(len(listMatrix)))
     tempStr = ""
 
     for row in range(1, matrixSideLength + 1):
@@ -96,11 +94,11 @@ def ReturnMatrix(listMatrix):
             
         for col in range(1, matrixSideLength + 1):
             if ((row == (matrixSideLength)) and (col == matrixSideLength)):
-                strRow = strRow + GetInlineMatrixIndexValue(matrix, row, col) + '}'
+                strRow = strRow + GetInlineMatrixIndexValue(listMatrix, row, col) + '}'
             elif (col == matrixSideLength):
-                strRow = strRow + GetInlineMatrixIndexValue(matrix, row, col) + '},'
+                strRow = strRow + GetInlineMatrixIndexValue(listMatrix, row, col) + '},'
             else:
-                strRow = strRow + GetInlineMatrixIndexValue(matrix, row, col) + ', '
+                strRow = strRow + GetInlineMatrixIndexValue(listMatrix, row, col) + ', '
 
         tempStr = tempStr + strRow
     
@@ -110,7 +108,7 @@ def ReturnMatrix(listMatrix):
 
 
 def PrintMatrixValue(listMatrix, row, col):
-    print('({},{}) = {}'.format(row,col,GetInlineMatrixIndexValue(matrix, row, col)))
+    print('({},{}) = {}'.format(row,col,GetInlineMatrixIndexValue(listMatrix, row, col)))
 
 
 def BoolIsReflexive(listMatrix):
@@ -140,12 +138,14 @@ def MakeReflexiveMatrix(listMatrix):
 
     for i in range(1, (matrixSideLength + 1)):
         SetInlineMatrixIndexValue(listMatrix, i, i, '1')
+    
+    return listMatrix
 
 def MakeSymmetricMatrix(listMatrix):
-    matrixSideLength - int(math.sqrt(len(listMatrix)))
+    matrixSideLength = int(math.sqrt(len(listMatrix)))
 
     for row in range(1, (matrixSideLength + 1)):
-        for col in range(1, (matrixSideLenght + 1)):
+        for col in range(1, (matrixSideLength + 1)):
             a = GetInlineMatrixIndexValue(listMatrix, row, col)
             b = GetInlineMatrixIndexValue(listMatrix, col, row)
 
@@ -153,12 +153,30 @@ def MakeSymmetricMatrix(listMatrix):
                 SetInlineMatrixIndexValue(listMatrix, row, col, '1')
                 SetInlineMatrixIndexValue(listMatrix, col, row, '1')
 
+    return listMatrix
 
 
+class Usage(Exception):
+    def __init__(self, msg):
+        self.msg = msg
 
 
+def main(argv=None):
+    if argv is None:
+        argv = sys.argv
+    try:
+        try:
+            opts, args = getopt.getopt(argv[1:], "h", ["help"])
+        except getopt.error, msg:
+             raise Usage(msg)
+    except Usage, err:
+        print >>sys.stderr, err.msg
+        print >>sys.stderr, "for help use --help"
+        return 2
 
-# read matrix data from file, return matrix as a pythoic list
-matrix = GetInlineMatrixAsList('TestData.txt')
-MakeReflexiveMatrix(matrix)
-print(ReturnMatrix(matrix))
+    if(len(args) > 0):
+        for arg in args:
+            print(ReturnMatrix(MakeReflexiveMatrix(GetInlineMatrixAsList(arg))))
+
+if __name__ == "__main__":
+    sys.exit(main())
