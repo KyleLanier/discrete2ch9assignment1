@@ -20,7 +20,6 @@ import errno, sys, getopt  # for proper error handling
 import math                # to use sqrt() to find the side length of a NxN matrix
 
 
-
 def GetInlineMatrixAsList(strFilePath):
     # change the string of matrix data into a list so individual matrix indicies can be manipulated
     return list(GetInlineMatrxDataFromFile(strFilePath))
@@ -44,7 +43,7 @@ def GetInlineMatrxDataFromFile(strFilePath):
 
 def GetInlineMatrixIndexValue(listMatrix, row, col):
     return listMatrix[GetInlineMatrixIndex(listMatrix, row, col)]
-    
+
 
 def SetInlineMatrixIndexValue(listMatrix, row, col, newValue):
     listMatrix[GetInlineMatrixIndex(listMatrix, row, col)] = newValue
@@ -102,6 +101,7 @@ def PrintMatrix(listMatrix, boolPrintInline):
     
     print('\n')
 
+
 def ReturnMatrix(listMatrix):
     
     matrixSideLength = int(math.sqrt(len(listMatrix)))
@@ -138,6 +138,7 @@ def BoolIsReflexive(listMatrix):
     
     return True
 
+
 def BoolIsSymmetric(listMatrix):
     matrixSideLength = int(math.sqrt(len(listMatrix)))
 
@@ -151,6 +152,7 @@ def BoolIsSymmetric(listMatrix):
     
     return True
 
+
 def MakeReflexiveMatrix(listMatrix):
     matrixSideLength = int(math.sqrt(len(listMatrix)))
 
@@ -158,6 +160,7 @@ def MakeReflexiveMatrix(listMatrix):
         SetInlineMatrixIndexValue(listMatrix, i, i, '1')
     
     return listMatrix
+
 
 def MakeSymmetricMatrix(listMatrix):
     matrixSideLength = int(math.sqrt(len(listMatrix)))
