@@ -1,7 +1,7 @@
 # Student: Kyle Lanier y829k364
-# Student:
+# Grade: 100%
 # File: program1.py
-# Date: 9/20/2017
+# Date: 9/22/2017
 #
 # Program will:
 #               receive a data file (or multiple data files) via commandline
@@ -152,7 +152,27 @@ def BoolIsSymmetric(listMatrix):
     
     return True
 
+def MakeTransitiveClosureMatrix(listMatrix):
+    matrixSideLength = int(math.sqrt(len(listMatrix)))
 
+    # Warshalls Algorithm
+    for k in range(1, (matrixSideLength + 1)):
+        for row in range(1, (matrixSideLength + 1)):
+            for col in range(1, (matrixSideLength + 1)):
+
+                a = GetInlineMatrixIndexValue(listMatrix, row, col)
+                b = GetInlineMatrixIndexValue(listMatrix, row, k)
+                c = GetInlineMatrixIndexValue(listMatrix, k, col)
+
+                v = a
+
+                if (a == '1'  or ((b == '1') and (c == '1'))):
+                    v = '1'
+
+                SetInlineMatrixIndexValue(listMatrix, row, col, v)
+
+    return listMatrix
+    
 def MakeReflexiveMatrix(listMatrix):
     matrixSideLength = int(math.sqrt(len(listMatrix)))
 
@@ -197,7 +217,7 @@ def main(argv=None):
 
     if(len(args) > 0):
         for arg in args:
-            print(ReturnMatrix(MakeReflexiveMatrix(GetInlineMatrixAsList(arg))))
+            print(ReturnMatrix(MakeTransitiveClosureMatrix(GetInlineMatrixAsList(arg))))
 
 if __name__ == "__main__":
     sys.exit(main())
